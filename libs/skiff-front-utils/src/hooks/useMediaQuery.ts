@@ -47,9 +47,6 @@ export interface UseMediaQueryOptions {
   ssrMatchMedia?: (query: string) => { matches: boolean };
 }
 
-// eslint-disable-next-line no-useless-concat -- Workaround for https://github.com/webpack/webpack/issues/14814
-const maybeReactUseSyncExternalStore: undefined | any = (React as any)['useSyncExternalStore' + ''];
-
 function useMediaQueryImplementation(
   query: string,
   defaultMatches: boolean,
@@ -106,9 +103,7 @@ export default function useMediaQuery<Theme = unknown>(
   } = options;
 
   const query = queryInput.replace(/^@media( ?)/m, '');
-  const match =
-    maybeReactUseSyncExternalStore !== undefined
-      ? false
-      : useMediaQueryImplementation(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr);
-  return match;
+  // React 17 does not export useSyncExternalStore. A static probe of that
+  // export is rewritten by esbuild into a named import that webpack throws on.
+  return useMediaQueryImplementation(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr);
 }
