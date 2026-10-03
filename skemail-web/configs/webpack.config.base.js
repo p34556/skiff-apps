@@ -237,7 +237,9 @@ export default {
   resolve: {
     alias: {
       handlebars: 'handlebars/dist/handlebars.js',
-      '@mui/material/Box': require.resolve('@mui/material/Box') // Make sure we use the same Box - fix crash when opening workspaces drawer. TODO: Remove it after we have the same MUI versions for all deps
+      '@mui/material/Box': require.resolve('@mui/material/Box'), // Make sure we use the same Box - fix crash when opening workspaces drawer. TODO: Remove it after we have the same MUI versions for all deps
+      // Workspace copies of notistack would each create a Snackbar context, so useSnackbar() in shared libs misses the app provider.
+      notistack: require.resolve('notistack')
     },
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     fallback: {
