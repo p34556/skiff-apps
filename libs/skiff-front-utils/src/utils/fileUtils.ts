@@ -184,7 +184,6 @@ export const getIconFromMIMEType = (type: string): NWIcon =>
     [FileTypes.Code]: NWIcon.CodeBlock,
     [FileTypes.Sheet]: NWIcon.Table,
     [FileTypes.Word]: NWIcon.Word,
-    [FileTypes.Code]: NWIcon.CodeBlock,
     [FileTypes.Text]: NWIcon.Text,
     [FileTypes.Calendar]: NWIcon.Calendar,
     [FileTypes.PresentPlay]: NWIcon.PresentPlay,

@@ -33,7 +33,8 @@ const TextPreview: PreviewComponent = ({ data }: PreviewComponentProps) => {
         const blob = await res.blob();
         const textVal = await blob.text();
         const { marked } = await import('marked');
-        const docHTML = DOMPurify.sanitize(marked(textVal));
+        const rendered = await marked(textVal);
+        const docHTML = DOMPurify.sanitize(rendered);
         setPreviewHTML(docHTML);
       }
     };
